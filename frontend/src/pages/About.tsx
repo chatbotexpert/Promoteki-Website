@@ -32,13 +32,13 @@ const About = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          <p className="text-sm md:text-base uppercase tracking-widest mb-4 font-medium text-gray-500">The Studio — 01</p>
+          <p className="text-xs sm:text-sm uppercase tracking-[0.4em] mb-6 font-bold text-black/30">The Studio — 01</p>
           <h1 className="text-[10vw] md:text-[8vw] leading-[0.85] font-bold tracking-tighter uppercase display-font">
             <span className="block overflow-hidden">
               <motion.span
-                initial={{ y: "100%", filter: "blur(10px)" }}
+                initial={{ y: "110%", filter: "blur(12px)" }}
                 animate={{ y: 0, filter: "blur(0px)" }}
-                transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 1, delay: 0.1, ease: [0.76, 0, 0.24, 1] }}
                 className="block text-black"
               >
                 About
@@ -46,9 +46,9 @@ const About = () => {
             </span>
             <span className="block overflow-hidden">
               <motion.span
-                initial={{ y: "100%", filter: "blur(10px)" }}
+                initial={{ y: "110%", filter: "blur(12px)" }}
                 animate={{ y: 0, filter: "blur(0px)" }}
-                transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 1, delay: 0.2, ease: [0.76, 0, 0.24, 1] }}
                 className="block text-black"
               >
                 Us.
