@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -10,9 +10,17 @@ import Blog from './pages/Blog';
 import Contact from './pages/Contact';
 import TermsOfUse from './pages/TermsOfUse';
 import PrivacyPolicy from './pages/PrivacyPolicy';
+import Login from './pages/Login';
+import AdminDashboard from './pages/AdminDashboard';
+
+const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
+  const isAuthenticated = localStorage.getItem('promoteki_admin_auth') === 'true';
+  return isAuthenticated ? <>{children}</> : <Navigate to="/login" replace />;
+};
 
 const App = () => {
   const { pathname } = useLocation();
+  const isAdminPage = pathname.startsWith('/admin') || pathname === '/login';
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -20,7 +28,7 @@ const App = () => {
 
   return (
     <div className="min-h-screen">
-      <Navbar />
+      {!isAdminPage && <Navbar />}
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -31,9 +39,20 @@ const App = () => {
           <Route path="/contact" element={<Contact />} />
           <Route path="/terms-of-use" element={<TermsOfUse />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          
+          {/* Admin Routes */}
+          <Route path="/login" element={<Login />} />
+          <Route 
+            path="/admin/*" 
+            element={
+              <ProtectedRoute>
+                <AdminDashboard />
+              </ProtectedRoute>
+            } 
+          />
         </Routes>
       </main>
-      <Footer />
+      {!isAdminPage && <Footer />}
     </div>
   );
 };

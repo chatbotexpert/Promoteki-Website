@@ -78,7 +78,10 @@ const Footer = () => {
             </div>
           </div>
           <div className="flex flex-col md:flex-row justify-between items-center b-top border-gray-800 pt-8">
-            <p>© 2026 Promoteki. All Rights Reserved.</p>
+            <div className="flex items-center gap-6">
+              <p>© 2026 Promoteki. All Rights Reserved.</p>
+              <Link to="/admin" className="text-[10px] font-bold uppercase tracking-widest text-gray-800 hover:text-white transition-colors">Admin Console</Link>
+            </div>
             <button
               onClick={() => window.__lenis ? window.__lenis.scrollTo(0) : window.scrollTo(0, 0)}
               className="uppercase tracking-widest mt-4 md:mt-0 hover:text-white transition-colors cursor-pointer bg-transparent border-none text-gray-400 text-sm"
