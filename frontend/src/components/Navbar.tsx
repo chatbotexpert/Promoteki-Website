@@ -71,9 +71,9 @@ const Navbar = () => {
               {!isScrolled && (
                 <motion.span
                   key="logo-text"
-                  initial={{ opacity: 0, x: -10, filter: "blur(4px)" }}
-                  animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
-                  exit={{ opacity: 0, x: -10, filter: "blur(4px)" }}
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -10 }}
                   transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                   className="text-white font-black text-lg tracking-tighter hidden lg:block"
                   style={{ fontFamily: "'Syne', sans-serif" }}

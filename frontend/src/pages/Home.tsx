@@ -279,13 +279,13 @@ const Home = () => {
         <p className="text-xs font-bold uppercase tracking-widest mb-12">Selected Work —</p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16 max-w-7xl mx-auto">
           {[
-            { title: 'Analytics Dashboard', tag: 'SaaS / Web App', img: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop' },
-            { title: 'Invoice Automation Bot', tag: 'RPA Solution', img: 'https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?q=80&w=2670&auto=format&fit=crop', offset: true },
-            { title: 'Mobile Banking App', tag: 'Mobile Development', img: 'https://images.unsplash.com/photo-1563986768494-4dee2763ff0f?q=80&w=2670&auto=format&fit=crop' },
+            { title: 'Analytics Dashboard', tag: 'SaaS / Web App', img: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200&auto=format&fit=crop' },
+            { title: 'Invoice Automation Bot', tag: 'RPA Solution', img: 'https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?q=80&w=800&auto=format&fit=crop', offset: true },
+            { title: 'Mobile Banking App', tag: 'Mobile Development', img: 'https://images.unsplash.com/photo-1563986768494-4dee2763ff0f?q=80&w=1200&auto=format&fit=crop' },
           ].map((work, i) => (
             <div key={i} className={`group cursor-pointer ${work.offset ? 'md:mt-24' : ''}`}>
               <div className="aspect-[4/3] bg-gray-200 overflow-hidden mb-6 relative">
-                <img src={work.img} className="w-full h-full object-cover img-reveal" alt={work.title} />
+                <img src={work.img} className="w-full h-full object-cover img-reveal" alt={work.title} loading="lazy" />
               </div>
               <div className="flex justify-between items-start">
                 <div>

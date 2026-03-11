@@ -4,18 +4,17 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import './index.css';
 
+import Lenis from 'lenis';
+
 // Initialize Lenis
 const initLenis = () => {
-  // @ts-ignore
-  if (window.Lenis) {
-    // @ts-ignore
-    const lenis = new window.Lenis();
-    const raf = (time: number) => {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    };
+  const lenis = new Lenis();
+  (window as any).lenis = lenis;
+  const raf = (time: number) => {
+    lenis.raf(time);
     requestAnimationFrame(raf);
-  }
+  };
+  requestAnimationFrame(raf);
 };
 
 const Root = () => {
