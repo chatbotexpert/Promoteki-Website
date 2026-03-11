@@ -32,7 +32,7 @@ const About = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          <p className="text-sm md:text-base uppercase tracking-widest mb-4 font-medium text-gray-500">The Studio — 01</p>
+          <p className="text-sm md:text-base uppercase tracking-widest mb-4 font-medium text-gray-500">The Promoteki Kulture — 01</p>
           <h1 className="text-[10vw] md:text-[8vw] leading-[0.85] font-bold tracking-tighter uppercase display-font">
             <span className="block overflow-hidden">
               <motion.span
@@ -78,7 +78,7 @@ const About = () => {
       <Marquee text="DESIGN × DEVELOP × AUTOMATE —" dark={true} />
       {/* Principles Section - Professional Minimal */}
       <section className="py-40 px-6 relative bg-white">
-        <motion.div 
+        <motion.div
           initial={{ scaleX: 0 }}
           whileInView={{ scaleX: 1 }}
           transition={{ duration: 1.5, ease: [0.76, 0, 0.24, 1] }}
@@ -92,7 +92,7 @@ const About = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 lg:gap-24">
             {coreValues.map((value, i) => (
-              <motion.div 
+              <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -115,7 +115,7 @@ const About = () => {
 
       {/* Team Section - Clean Data-Grid */}
       <section className="py-40 px-6 bg-[#F4F4F0] relative">
-        <motion.div 
+        <motion.div
           initial={{ scaleX: 0 }}
           whileInView={{ scaleX: 1 }}
           transition={{ duration: 1.5, ease: [0.76, 0, 0.24, 1] }}
@@ -134,7 +134,7 @@ const About = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border-t border-black/5">
             {team.map((member, i) => (
-              <motion.div 
+              <motion.div
                 key={i}
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
@@ -160,7 +160,7 @@ const About = () => {
 
       {/* Bottom CTA */}
       <section className="py-48 px-6 flex flex-col items-center justify-center text-center bg-white border-t border-black/5">
-        <motion.h2 
+        <motion.h2
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, ease: [0.76, 0, 0.24, 1] }}
@@ -169,7 +169,7 @@ const About = () => {
           Building for the <span className="text-black italic">exponential era.</span>
         </motion.h2>
         <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="relative group">
-          <Link 
+          <Link
             to="/contact"
             className="px-16 py-6 bg-black text-[#D4FF3F] text-xs uppercase font-bold tracking-[0.3em] hover:bg-[#D4FF3F] hover:text-black transition-all duration-500 inline-block"
           >

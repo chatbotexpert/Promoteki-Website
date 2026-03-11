@@ -101,7 +101,7 @@ const Home = () => {
             </p>
           </div>
           <div className="col-span-1 flex items-end justify-start md:justify-end">
-            <p className="text-sm uppercase tracking-widest text-gray-500">Based in Multan, PK<br />Working Globally</p>
+            <p className="text-sm uppercase tracking-widest text-gray-500">Based in South Asia<br />Working Globally</p>
           </div>
         </div>
       </section>
@@ -114,7 +114,7 @@ const Home = () => {
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
             <div className="lg:col-span-5">
-              <p className="text-xs font-bold uppercase tracking-widest text-gray-500 mb-6">About Studio</p>
+              <p className="text-xs font-bold uppercase tracking-widest text-gray-500 mb-6">About Promoteki</p>
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tighter display-font text-[#111111]">
                 Empowering brands to scale through automation™.
               </h2>
@@ -280,8 +280,9 @@ const Home = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16 max-w-7xl mx-auto">
           {[
             { title: 'Analytics Dashboard', tag: 'SaaS / Web App', img: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200&auto=format&fit=crop' },
-            { title: 'Invoice Automation Bot', tag: 'RPA Solution', img: 'https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?q=80&w=800&auto=format&fit=crop', offset: true },
-            { title: 'Mobile Banking App', tag: 'Mobile Development', img: 'https://images.unsplash.com/photo-1563986768494-4dee2763ff0f?q=80&w=1200&auto=format&fit=crop' },
+            { title: 'Social Media Aggregator', tag: 'Automation / Translator', img: '/images/social_media_aggregator.png', offset: true },
+            { title: 'Invoice Automation Bot', tag: 'RPA Solution', img: 'https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?q=80&w=800&auto=format&fit=crop' },
+            { title: 'Hyper RSS', tag: 'Automation / Integration', img: '/images/hyper_rss.png', offset: true },
           ].map((work, i) => (
             <div key={i} className={`group cursor-pointer ${work.offset ? 'md:mt-24' : ''}`}>
               <div className="aspect-[4/3] bg-gray-200 overflow-hidden mb-6 relative">
