@@ -1,4 +1,4 @@
-import React from 'react';
+import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Marquee from '../components/Marquee';
 
@@ -32,13 +32,13 @@ const About = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          <p className="text-xs sm:text-sm uppercase tracking-[0.4em] mb-6 font-bold text-black/30">The Studio — 01</p>
+          <p className="text-sm md:text-base uppercase tracking-widest mb-4 font-medium text-gray-500">The Studio — 01</p>
           <h1 className="text-[10vw] md:text-[8vw] leading-[0.85] font-bold tracking-tighter uppercase display-font">
             <span className="block overflow-hidden">
               <motion.span
-                initial={{ y: "110%", filter: "blur(12px)" }}
+                initial={{ y: "100%", filter: "blur(10px)" }}
                 animate={{ y: 0, filter: "blur(0px)" }}
-                transition={{ duration: 1, delay: 0.1, ease: [0.76, 0, 0.24, 1] }}
+                transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
                 className="block text-black"
               >
                 About
@@ -46,9 +46,9 @@ const About = () => {
             </span>
             <span className="block overflow-hidden">
               <motion.span
-                initial={{ y: "110%", filter: "blur(12px)" }}
+                initial={{ y: "100%", filter: "blur(10px)" }}
                 animate={{ y: 0, filter: "blur(0px)" }}
-                transition={{ duration: 1, delay: 0.2, ease: [0.76, 0, 0.24, 1] }}
+                transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
                 className="block text-black"
               >
                 Us.
@@ -56,9 +56,9 @@ const About = () => {
             </span>
           </h1>
         </motion.div>
-        
+
         <div className="mt-12 max-w-3xl relative">
-          <motion.div 
+          <motion.div
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
@@ -76,67 +76,105 @@ const About = () => {
       </section>
 
       <Marquee text="DESIGN × DEVELOP × AUTOMATE —" dark={true} />
-
-      {/* Principles Section - Simple Layout */}
-      <section className="py-32 px-6 relative">
+      {/* Principles Section - Professional Minimal */}
+      <section className="py-40 px-6 relative bg-white">
         <motion.div 
           initial={{ scaleX: 0 }}
           whileInView={{ scaleX: 1 }}
-          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-          className="absolute top-0 left-0 w-full h-[1px] bg-black/10 origin-left"
+          transition={{ duration: 1.5, ease: [0.76, 0, 0.24, 1] }}
+          className="absolute top-0 left-0 w-full h-[1px] bg-black/5 origin-left"
         />
         <div className="max-w-7xl mx-auto">
-          <div className="mb-16">
-            <p className="text-xs font-bold uppercase tracking-[0.3em] mb-4 text-black/40">Company — 02</p>
-            <h2 className="text-5xl md:text-7xl font-bold tracking-tighter uppercase display-font">Core Values</h2>
+          <div className="mb-24">
+            <p className="text-xs uppercase tracking-[0.4em] mb-6 font-bold text-black/30">Company — 02</p>
+            <h2 className="text-5xl md:text-8xl font-bold tracking-tighter uppercase display-font leading-none">Core Values</h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 lg:gap-24">
             {coreValues.map((value, i) => (
-              <div key={i} className="flex flex-col">
-                <span className="text-sm font-mono text-black/40 mb-6">0{i + 1}</span>
-                <h3 className="text-2xl font-bold uppercase tracking-tight display-font mb-4">{value.title}</h3>
-                <p className="text-gray-600 leading-relaxed font-medium">{value.desc}</p>
-              </div>
+              <motion.div 
+                key={i}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, delay: i * 0.15, ease: [0.215, 0.61, 0.355, 1] }}
+                className="flex flex-col relative group"
+              >
+                <div className="flex items-center gap-4 mb-8 overflow-hidden">
+                  <span className="text-xs font-mono text-black/20 group-hover:text-black transition-colors duration-500">0{i + 1}</span>
+                  <div className="h-[1px] w-8 bg-black/10 group-hover:w-16 group-hover:bg-black transition-all duration-700" />
+                </div>
+                <h3 className="text-2xl md:text-3xl font-bold uppercase tracking-tight display-font mb-6 leading-[1.1]">{value.title}</h3>
+                <p className="text-sm md:text-base text-black/50 leading-relaxed font-medium max-w-sm">
+                  {value.desc}
+                </p>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Team Section - Simple Grid */}
-      <section className="py-32 px-6 bg-white relative">
+      {/* Team Section - Clean Data-Grid */}
+      <section className="py-40 px-6 bg-[#F4F4F0] relative">
         <motion.div 
           initial={{ scaleX: 0 }}
           whileInView={{ scaleX: 1 }}
-          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-          className="absolute top-0 left-0 w-full h-[1px] bg-black/10 origin-left"
+          transition={{ duration: 1.5, ease: [0.76, 0, 0.24, 1] }}
+          className="absolute top-0 left-0 w-full h-[1px] bg-black/5 origin-left"
         />
         <div className="max-w-7xl mx-auto">
-          <div className="mb-16">
-            <p className="text-xs font-bold uppercase tracking-[0.3em] mb-4 text-black/40">Our People — 03</p>
-            <h2 className="text-5xl md:text-7xl font-bold tracking-tighter uppercase display-font">The Team</h2>
+          <div className="mb-24">
+            <p className="text-xs uppercase tracking-[0.4em] mb-6 font-bold text-black/30">Our People — 03</p>
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
+              <h2 className="text-5xl md:text-8xl font-bold tracking-tighter uppercase display-font leading-none">The Team</h2>
+              <p className="text-sm md:text-base text-black/40 font-medium max-w-xs mb-2">
+                Unified by a shared vision of precision-engineered excellence.
+              </p>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border-t border-black/5">
             {team.map((member, i) => (
-              <div key={i} className="flex flex-col p-8 border border-black/5 hover:border-black/10 transition-colors">
-                <h3 className="text-xl font-bold uppercase display-font mb-1">{member.name}</h3>
-                <p className="text-xs font-bold uppercase tracking-widest text-gray-400">{member.role}</p>
-              </div>
+              <motion.div 
+                key={i}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: 1, delay: i * 0.05 }}
+                className="group border-b border-r border-black/5 p-10 flex flex-col justify-between aspect-square hover:bg-white transition-colors duration-500"
+              >
+                <div className="text-[10px] font-bold uppercase tracking-widest text-black/20 group-hover:text-black transition-colors">
+                  {member.name.split(' ').map(n => n[0]).join('')}
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold uppercase tracking-tighter display-font mb-1 group-hover:translate-x-1 transition-transform duration-500">{member.name}</h3>
+                  <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-black/30 group-hover:translate-x-1 transition-transform duration-500 delay-75">{member.role}</p>
+                </div>
+              </motion.div>
             ))}
+            {/* Minimalist filler to maintain grid rhythm */}
+            <div className="border-b border-black/5 p-10 hidden lg:flex flex-col justify-center items-center opacity-5">
+              <span className="text-[4vw] font-bold display-font select-none">P</span>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Bottom CTA */}
-      <section className="py-40 px-6 flex flex-col items-center justify-center text-center">
-        <h2 className="text-4xl md:text-6xl font-black display-font uppercase tracking-tighter mb-12 max-w-4xl text-black">
-          We're constantly looking for the <span className="text-black/20 italic">next big challenge.</span>
-        </h2>
-        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-          <button className="px-12 py-5 bg-black text-[#D4FF3F] text-sm uppercase font-black tracking-widest hover:bg-[#D4FF3F] hover:text-black transition-all duration-300">
-            Join the collective
-          </button>
+      <section className="py-48 px-6 flex flex-col items-center justify-center text-center bg-white border-t border-black/5">
+        <motion.h2 
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, ease: [0.76, 0, 0.24, 1] }}
+          className="text-4xl md:text-7xl font-bold display-font uppercase tracking-tight mb-16 max-w-5xl leading-none"
+        >
+          Building for the <span className="text-black italic">exponential era.</span>
+        </motion.h2>
+        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="relative group">
+          <Link 
+            to="/contact"
+            className="px-16 py-6 bg-black text-[#D4FF3F] text-xs uppercase font-bold tracking-[0.3em] hover:bg-[#D4FF3F] hover:text-black transition-all duration-500 inline-block"
+          >
+            Start your project
+          </Link>
         </motion.div>
       </section>
     </div>
