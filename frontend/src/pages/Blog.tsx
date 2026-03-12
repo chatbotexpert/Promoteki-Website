@@ -77,21 +77,21 @@ const Blog = () => {
             className="pt-24 pb-24"
           >
             {/* Post Hero */}
-            <header className="relative pt-24 pb-16 px-6 border-b border-black/10 overflow-hidden bg-[#FDFCF7]">
+            <header className="relative pt-32 pb-16 px-6 border-b border-black/10 overflow-hidden bg-[#FDFCF7]">
               {/* Subtle Grid Background */}
               <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(#000 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
               
-              <div className="max-w-7xl mx-auto relative z-10">
+              <div className="max-w-7xl mx-auto relative z-10 w-full">
                 <Link 
                   to="/blog"
-                  className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-black/40 hover:text-black transition-colors mb-16 group"
+                  className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-black/40 hover:text-black transition-colors mb-8 sm:mb-16 group"
                 >
                   <ArrowLeft size={12} className="group-hover:-translate-x-1 transition-transform" />
                   Return to Feed
                 </Link>
 
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-end">
-                  <div className="lg:col-span-8">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start lg:items-end">
+                  <div className="w-full lg:col-span-8">
                     <div className="flex flex-wrap gap-2 mb-8">
                       {selectedPost.tags.map((tag, ti) => (
                         <span key={ti} className="text-[9px] font-black uppercase tracking-widest bg-black text-white px-3 py-1">
@@ -99,7 +99,7 @@ const Blog = () => {
                         </span>
                       ))}
                     </div>
-                    <h1 className="text-4xl md:text-6xl font-bold display-font tracking-tighter leading-[0.9] uppercase">
+                    <h1 className="text-3xl sm:text-4xl md:text-7xl font-bold display-font tracking-tighter leading-[1.1] md:leading-[0.9] uppercase break-words">
                       {selectedPost.title}
                     </h1>
                   </div>
@@ -136,10 +136,11 @@ const Blog = () => {
                 </div>
               </aside>
 
-              <div className="lg:col-span-7 lg:col-start-5">
+              <div className="w-full lg:col-span-7 lg:col-start-5">
                 <div 
-                  className="blog-content-rich prose prose-lg md:prose-xl prose-stone max-w-none 
-                    prose-h2:display-font prose-h2:text-3xl prose-h2:md:text-4xl prose-h2:uppercase prose-h2:tracking-tighter prose-h2:mt-16 prose-h2:mb-8
+                  className="blog-content-rich prose prose-stone max-w-none w-full md:prose-lg lg:prose-xl
+                    prose-h2:display-font prose-h2:text-2xl prose-h2:sm:text-3xl prose-h2:md:text-4xl prose-h2:uppercase prose-h2:tracking-tighter prose-h2:mt-16 prose-h2:mb-8
+                    prose-h3:display-font prose-h3:text-xl prose-h3:sm:text-2xl prose-h3:md:text-3xl prose-h3:uppercase prose-h3:tracking-tighter prose-h3:mt-12 prose-h3:mb-6
                     prose-p:text-black/70 prose-p:leading-relaxed prose-p:mb-8
                     prose-blockquote:border-l-[#D4FF3F] prose-blockquote:bg-[#F4F4F0] prose-blockquote:py-8 prose-blockquote:px-10 prose-blockquote:italic prose-blockquote:font-medium prose-blockquote:my-12 prose-blockquote:rounded-r-lg
                     prose-strong:text-black prose-strong:font-bold

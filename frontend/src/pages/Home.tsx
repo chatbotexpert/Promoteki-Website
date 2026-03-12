@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Marquee from '../components/Marquee';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const services = [
-  { num: '01', title: 'Web Development', desc: 'Modern, high-performance web applications built with the latest frameworks to drive conversions and user engagement.' },
-  { num: '02', title: 'RPA Solutions', desc: 'Automate repetitive tasks and business workflows with Robotic Process Automation, improving efficiency and reducing costs.' },
-  { num: '03', title: 'API Integration', desc: 'Design and integrate secure, reliable APIs to connect your systems, third-party apps, and business tools seamlessly.' },
-  { num: '04', title: 'SaaS Development', desc: 'Build scalable and secure SaaS applications that can be easily deployed and scaled for growing user bases.' },
-  { num: '05', title: 'Custom Bots', desc: 'Build intelligent bots for data scraping, reporting, and system integrations to save time and eliminate manual errors.' },
+  { num: '01', title: 'Web Development', desc: 'Modern, high-performance web applications built with the latest frameworks to drive conversions and user engagement.', image: '/images/web_dev.png' },
+  { num: '02', title: 'CRM Solutions', desc: 'Custom CRM development and automation to streamline your customer relationships and business operations.', image: '/images/rpa_solutions.png' },
+  { num: '03', title: 'API Integration', desc: 'Design and integrate secure, reliable APIs to connect your systems, third-party apps, and business tools seamlessly.', image: '/images/api_integration.png' },
+  { num: '04', title: 'SaaS Development', desc: 'Build scalable and secure SaaS applications that can be easily deployed and scaled for growing user bases.', image: '/images/saas_dev.png' },
+  { num: '05', title: 'Custom Bots', desc: 'Build intelligent bots for data scraping, reporting, and system integrations to save time and eliminate manual errors.', image: '/images/custom_bots.png' },
 ];
 
 const ArrowIcon = () => (
@@ -27,6 +28,13 @@ const Home = () => {
   const [industryInput, setIndustryInput] = useState('');
   const [tailoredServices, setTailoredServices] = useState(null);
   const [industryLoading, setIndustryLoading] = useState(false);
+
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    setMousePos({ x: e.clientX, y: e.clientY });
+  };
 
   const fetchGemini = async (payload) => {
     const apiKey = '';
@@ -89,7 +97,7 @@ const Home = () => {
       {/* Hero */}
       <section className="pt-32 pb-16 px-6 min-h-[80vh] flex flex-col justify-end">
         <p className="text-sm md:text-base uppercase tracking-widest mb-4 font-medium max-w-xl">
-          RPA and Automation.
+          CRM Development and Automation.
         </p>
         <h1 className="text-[12vw] leading-[0.85] font-bold tracking-tighter uppercase display-font">
           Promoteki
@@ -97,7 +105,7 @@ const Home = () => {
         <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-8 b-top pt-8">
           <div className="col-span-1 md:col-span-2">
             <p className="text-xl md:text-3xl font-medium leading-tight max-w-3xl display-font">
-              Providing automation services for businesses with RPA Tools + APIs. We transform workflows into seamless digital experiences.
+              Providing high-end CRM development and business automation. We transform customer workflows into seamless digital experiences.
             </p>
           </div>
           <div className="col-span-1 flex items-end justify-start md:justify-end">
@@ -163,7 +171,10 @@ const Home = () => {
       </section>
 
       {/* Services Section */}
-      <section className="pt-32 pb-24 bg-white border-t border-black/10">
+      <section 
+        className="pt-32 pb-24 bg-white border-t border-black/10 relative"
+        onMouseMove={handleMouseMove}
+      >
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="mb-16 flex flex-col xl:flex-row justify-between items-start xl:items-end gap-10">
             <div className="max-w-2xl">
@@ -186,14 +197,55 @@ const Home = () => {
             <p className="text-xs font-mono text-gray-500 mb-8 animate-pulse">&gt; RECALIBRATING AGENCY SERVICES FOR DOMAIN...</p>
           )}
 
-          <div className="border-t border-black/10">
+          <div className="border-t border-black/10 relative">
+            {/* Floating Image Component */}
+            <motion.div
+              className="pointer-events-none fixed z-50 w-64 aspect-[4/5] overflow-hidden rounded-xl shadow-2xl hidden lg:block"
+              style={{
+                left: mousePos.x,
+                top: mousePos.y,
+                x: "-50%",
+                y: "-50%",
+              }}
+              animate={{
+                scale: hoveredIndex !== null ? 1 : 0,
+                opacity: hoveredIndex !== null ? 1 : 0,
+                rotate: hoveredIndex !== null ? 0 : 10,
+              }}
+              transition={{
+                type: "spring",
+                stiffness: 150,
+                damping: 20,
+                mass: 0.5
+              }}
+            >
+              <AnimatePresence mode="wait">
+                {hoveredIndex !== null && (
+                  <motion.img
+                    key={hoveredIndex}
+                    src={displayServices[hoveredIndex]?.image || services[hoveredIndex]?.image}
+                    initial={{ opacity: 0, scale: 1.1 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.9 }}
+                    transition={{ duration: 0.3 }}
+                    className="w-full h-full object-cover"
+                  />
+                )}
+              </AnimatePresence>
+            </motion.div>
+
             {displayServices.map((svc, i) => (
-              <div key={i} className="group border-b border-black/10 py-10 flex flex-col md:flex-row justify-between md:items-center gap-6 cursor-pointer hover:bg-[#F4F4F0] transition-colors px-6 -mx-6">
+              <div 
+                key={i} 
+                onMouseEnter={() => setHoveredIndex(i)}
+                onMouseLeave={() => setHoveredIndex(null)}
+                className="group border-b border-black/10 py-8 min-[400px]:py-10 flex flex-col md:flex-row justify-between md:items-center gap-6 cursor-pointer hover:bg-[#F4F4F0] transition-colors px-6 -mx-6 relative z-10"
+              >
                 <div className="flex items-start gap-8">
                   <span className="text-sm font-mono text-gray-400 mt-2">{svc.num}</span>
                   <div>
-                    <h3 className="text-3xl md:text-5xl font-bold display-font uppercase tracking-tighter mb-3 group-hover:pl-4 transition-all duration-300">{svc.title}</h3>
-                    <p className="text-gray-600 max-w-xl group-hover:pl-4 transition-all duration-300 delay-75 text-sm md:text-base">{svc.desc}</p>
+                    <h3 className="text-2xl min-[400px]:text-3xl md:text-5xl font-bold display-font uppercase tracking-tighter mb-3 group-hover:pl-4 transition-all duration-300">{svc.title}</h3>
+                    <p className="text-gray-600 max-w-xl group-hover:pl-4 transition-all duration-300 delay-75 text-sm md:text-base leading-relaxed">{svc.desc}</p>
                   </div>
                 </div>
                 <div className="hidden md:flex w-12 h-12 rounded-full border border-black/20 items-center justify-center group-hover:bg-black group-hover:text-white transition-all duration-300 group-hover:-rotate-45 flex-shrink-0">
