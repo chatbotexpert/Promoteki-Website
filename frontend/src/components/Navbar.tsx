@@ -36,9 +36,9 @@ const Navbar = () => {
   return (
     <>
       <div className="fixed top-6 left-0 w-full z-[100] flex justify-center px-4 pointer-events-none">
-        <motion.nav 
+        <motion.nav
           initial={false}
-          animate={{ 
+          animate={{
             maxWidth: isScrolled ? "540px" : "940px",
             // Padding-X also shifts to help the circular feel
             paddingLeft: isScrolled ? "10px" : "16px",
@@ -59,14 +59,14 @@ const Navbar = () => {
                 boxShadow: "inset 0 2px 4px rgba(255, 255, 255, 0.3), 0 0 10px rgba(212, 255, 63, 0.2)"
               }}
             >
-              <span 
+              <span
                 className="text-black font-black text-xl leading-none pt-0.5 select-none"
                 style={{ fontFamily: "'Syne', sans-serif" }}
               >
                 P
               </span>
             </motion.div>
-            
+
             <AnimatePresence mode="popLayout">
               {!isScrolled && (
                 <motion.span
@@ -85,7 +85,7 @@ const Navbar = () => {
           </Link>
 
           {/* Desktop Links (Shrinking layout) */}
-          <motion.div 
+          <motion.div
             layout
             className="hidden md:flex items-center gap-0.5 relative py-1"
           >
@@ -106,7 +106,7 @@ const Navbar = () => {
                     <ChevronDown size={13} className="opacity-40" />
                   </motion.div>
                 )}
-                
+
                 {hoveredLink === link.to && (
                   <motion.div
                     layoutId="nav-pill-bg"
@@ -142,8 +142,8 @@ const Navbar = () => {
               whileTap={{ scale: 0.98 }}
               className="relative"
             >
-              <Link 
-                to="/contact" 
+              <Link
+                to="/contact"
                 className="px-6 py-2.5 bg-white text-black text-[13px] font-bold rounded-full transition-all duration-300 shadow-lg border border-white/5 whitespace-nowrap inline-flex justify-center min-w-[100px]"
               >
                 <AnimatePresence mode="wait">
@@ -159,7 +159,7 @@ const Navbar = () => {
                 </AnimatePresence>
               </Link>
             </motion.div>
-            
+
             <button
               className="md:hidden w-10 h-10 flex items-center justify-center text-white bg-white/10 rounded-full"
               onClick={() => setMobileOpen(!mobileOpen)}
@@ -173,59 +173,66 @@ const Navbar = () => {
       {/* Mobile Menu Overlay */}
       <AnimatePresence>
         {mobileOpen && (
-          <motion.div 
-            initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
-            animate={{ opacity: 1, backdropFilter: "blur(30px)" }}
-            exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
-            className="fixed inset-0 z-[200] bg-[#111111]/95 flex flex-col items-center justify-center p-6"
+          <motion.div
+            initial={{ x: '100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '100%' }}
+            transition={{ type: "spring", damping: 25, stiffness: 200 }}
+            className="fixed inset-0 z-[200] bg-[#111111] flex flex-col pt-32 px-0"
           >
-            <motion.button
-              initial={{ scale: 0, rotate: -45 }}
-              animate={{ scale: 1, rotate: 0 }}
-              className="absolute top-8 right-8 text-white/50 hover:text-white transition-colors p-3 rounded-full border border-white/5 bg-white/5"
-              onClick={() => setMobileOpen(false)}
-            >
-              <X size={28} />
-            </motion.button>
-            
-            <div className="flex flex-col items-center gap-6">
-              <motion.div
-                initial={{ scale: 0, y: 30 }}
-                animate={{ scale: 1, y: 0 }}
-                transition={{ type: "spring", stiffness: 260, damping: 20, delay: 0.1 }}
-                className="w-20 h-20 rounded-full bg-[#D4FF3F] flex items-center justify-center mb-6 shadow-2xl"
+            {/* Header / Info bar */}
+            <div className="px-8 pb-8 border-b border-white/10 flex justify-between items-end">
+              <div>
+                <p className="text-[10px] uppercase tracking-[0.2em] text-white/30 mb-2"> Menu</p>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full bg-[#D4FF3F] animate-pulse" />
+                  <span className="text-white font-bold text-xs">Promoteki</span>
+                </div>
+              </div>
+              <button
+                className="text-white/50 hover:text-white transition-colors"
+                onClick={() => setMobileOpen(false)}
               >
-                <span className="text-black font-black text-4xl pt-1">P</span>
-              </motion.div>
-              
+                <X size={24} />
+              </button>
+            </div>
+
+            <div className="flex flex-col flex-grow">
               {navLinks.map((link, i) => (
-                <motion.div
+                <Link
                   key={link.to}
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.2 + (i * 0.1), ease: "easeOut" }}
+                  to={link.to}
+                  className="group relative px-8 py-8 border-b border-white/10 flex items-center justify-between"
                 >
-                  <Link
-                    to={link.to}
-                    className="display-font text-5xl font-bold text-white uppercase tracking-tighter hover:text-[#D4FF3F] transition-all"
+                  <motion.span
+                    initial={{ x: -20, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    transition={{ delay: 0.1 + (i * 0.05) }}
+                    className="display-font text-4xl font-black text-white uppercase tracking-tighter group-hover:text-[#D4FF3F] transition-colors"
+                    style={{ fontFamily: "'Syne', sans-serif" }}
                   >
                     {link.label}
-                  </Link>
-                </motion.div>
+                  </motion.span>
+                  <span className="text-white/20 group-hover:text-[#D4FF3F] transition-colors text-sm font-mono">
+                    0{i + 1}
+                  </span>
+                </Link>
               ))}
-              
-              <motion.div
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ delay: 0.6, type: "spring" }}
-              >
-                <Link 
-                  to="/contact" 
-                  className="mt-10 px-12 py-5 bg-[#D4FF3F] text-black text-xl font-extrabold rounded-full shadow-[0_20px_40px_rgba(212,255,63,0.2)]"
+
+              <div className="p-8 mt-auto border-t border-white/10 bg-white/[0.02]">
+                <Link
+                  to="/contact"
+                  className="w-full py-6 bg-[#D4FF3F] text-black text-center text-xl font-black uppercase tracking-tighter flex items-center justify-center gap-3 border-2 border-[#D4FF3F] hover:bg-transparent hover:text-[#D4FF3F] transition-all duration-300"
+                  style={{ fontFamily: "'Syne', sans-serif" }}
                 >
                   Let's Chat
+                  <div className="w-2 h-2 bg-black group-hover:bg-[#D4FF3F]" />
                 </Link>
-              </motion.div>
+                <div className="flex justify-between items-center mt-6 text-[10px] text-white/20 uppercase tracking-widest font-mono">
+                  <span>©2026 PROMOTEKI</span>
+                  <span>EST. MULTAN, PK</span>
+                </div>
+              </div>
             </div>
           </motion.div>
         )}
