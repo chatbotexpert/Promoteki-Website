@@ -75,7 +75,7 @@ const Navbar = () => {
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -10 }}
                   transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                  className="text-white font-black text-lg tracking-tighter hidden lg:block"
+                  className="text-white font-black text-sm sm:text-lg tracking-tighter block"
                   style={{ fontFamily: "'Syne', sans-serif" }}
                 >
                   PROMOTEKI

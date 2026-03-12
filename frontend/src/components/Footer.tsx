@@ -9,12 +9,12 @@ const Footer = () => {
       <section className="pt-32 pb-16 px-6 bg-black text-[#F4F4F0] flex flex-col items-center justify-center text-center">
         <p className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-6">Bring Ideas To Life —</p>
         <motion.h2 
-          className="text-6xl md:text-[8vw] leading-none font-bold display-font uppercase tracking-tighter mb-12 cursor-pointer select-none"
+          className="text-4xl md:text-[8vw] leading-[1.1] md:leading-none font-bold display-font uppercase tracking-tighter mb-12 cursor-pointer select-none"
           initial="initial"
           whileHover="hover"
         >
-          {["Ready to", "Start Today?"].map((line, lineIdx) => (
-            <span key={lineIdx} className="block py-1">
+          {["Ready to", "Start", "Today?"].map((line, lineIdx) => (
+            <span key={lineIdx} className={`${lineIdx === 0 ? 'block' : 'block md:inline'} py-1`}>
               {line.split("").map((char, charIdx) => (
                 <motion.span
                   key={charIdx}

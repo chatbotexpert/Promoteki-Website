@@ -30,3 +30,12 @@ export const deletePost = (id: string) => {
   const filtered = posts.filter(p => p.id !== id);
   localStorage.setItem(STORAGE_KEY, JSON.stringify(filtered));
 };
+
+export const calculateReadingTime = (content: string): number => {
+  const wordsPerMinute = 200;
+  // Remove HTML tags to count only text words
+  const text = content.replace(/<[^>]*>/g, ' ');
+  const words = text.trim().split(/\s+/).length;
+  const time = Math.ceil(words / wordsPerMinute);
+  return time;
+};
