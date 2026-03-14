@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Marquee from '../components/Marquee';
 
 const services = [
-  { num: '01', title: 'Web Development', desc: 'Modern and responsive websites and web applications built with the latest frameworks and best practices.' },
+  { num: '01', title: 'CRM Integration', desc: 'Modern and responsive CRMs built with the latest frameworks and best practices.' },
   { num: '02', title: 'RPA Solutions', desc: 'Automate repetitive tasks and business workflows with Robotic Process Automation, improving efficiency and reducing costs.' },
   { num: '03', title: 'API Development & Integration', desc: 'Design and integrate secure, reliable APIs to connect your systems, third-party apps, and business tools seamlessly.' },
   { num: '04', title: 'SaaS Development', desc: 'Build scalable and secure SaaS applications that can be easily deployed and scaled.' },

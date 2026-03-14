@@ -5,8 +5,9 @@ import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
 
 const navLinks = [
   { to: '/', label: 'Home' },
-  { to: '/services', label: 'Work', hasDropdown: true },
+  { to: '/services', label: 'Services', hasDropdown: true },
   { to: '/about', label: 'About Us' },
+  { to: '/pricing', label: 'Pricing' },
   { to: '/blog', label: 'Blog' },
 ];
 
@@ -20,7 +21,7 @@ const Navbar = () => {
   useEffect(() => {
     const handleScroll = () => {
       // Small threshold for earlier, smoother transition
-      setIsScrolled(window.scrollY > 20);
+      setIsScrolled(window.scrollY > 50);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -49,57 +50,67 @@ const Navbar = () => {
   }, []);
 
   // Spring transition config for that "creamy" feel
-  const springConfig = { type: "spring", stiffness: 260, damping: 30, mass: 1 } as const;
+  const springConfig = { type: "spring", stiffness: 200, damping: 25, mass: 1 } as const;
 
   return (
     <>
       <div className="fixed top-6 left-0 w-full z-[100] flex justify-center px-4 pointer-events-none">
         <motion.nav
+          layout
           initial={false}
           animate={{ 
-            maxWidth: isScrolled ? "min(540px, calc(100vw - 32px))" : "min(940px, calc(100vw - 32px))",
-            paddingLeft: isScrolled ? "10px" : "16px",
-            paddingRight: isScrolled ? "10px" : "16px",
-            gap: isScrolled ? "8px" : "24px"
+            maxWidth: isScrolled ? 640 : 1200,
+            paddingLeft: isScrolled ? "12px" : "16px",
+            paddingRight: isScrolled ? "12px" : "16px",
+            gap: isScrolled ? "12px" : "24px"
           }}
           transition={springConfig}
           className="flex items-center justify-between w-full bg-[#111111]/60 backdrop-blur-3xl border border-white/5 rounded-[40px] shadow-[0_20px_50px_rgba(0,0,0,0.5)] relative overflow-hidden py-2 pointer-events-auto mx-auto"
         >
           {/* Logo Section */}
-          <Link to="/" className="flex items-center gap-2.5 relative z-10 group flex-shrink-0">
-            <motion.div
-              whileHover={{ rotate: 90, scale: 1.1, boxShadow: "0 0 20px rgba(212, 255, 63, 0.4)" }}
-              transition={{ type: "spring", stiffness: 400, damping: 10 }}
-              className="w-10 h-10 rounded-full flex items-center justify-center overflow-hidden shadow-inner relative border border-white/20"
-              style={{
-                background: "radial-gradient(circle at center, #D4FF3F, #A3D900)",
-                boxShadow: "inset 0 2px 4px rgba(255, 255, 255, 0.3), 0 0 10px rgba(212, 255, 63, 0.2)"
-              }}
-            >
-              <span 
-                className="text-black font-black text-xl leading-none pt-0.5 select-none"
-                style={{ fontFamily: "'Syne', sans-serif" }}
+          <motion.div layout className="flex items-center">
+            <Link to="/" className="flex items-center gap-2.5 relative z-10 group flex-shrink-0">
+              <motion.div
+                layout
+                whileHover={{ rotate: 90, scale: 1.1, boxShadow: "0 0 20px rgba(212, 255, 63, 0.4)" }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                className="w-10 h-10 rounded-full flex items-center justify-center overflow-hidden shadow-inner relative border border-white/20 flex-shrink-0"
+                style={{
+                  background: "radial-gradient(circle at center, #D4FF3F, #A3D900)",
+                  boxShadow: "inset 0 2px 4px rgba(255, 255, 255, 0.3), 0 0 10px rgba(212, 255, 63, 0.2)"
+                }}
               >
-                P
-              </span>
-            </motion.div>
-            
-            <AnimatePresence>
-              {!isScrolled && (
-                <motion.span
-                  key="logo-text"
-                  initial={{ opacity: 0, x: -5 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -5 }}
-                  transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                  className="text-white font-black text-xs sm:text-lg tracking-tighter hidden min-[320px]:block whitespace-nowrap"
+                <motion.span 
+                  layout
+                  className="text-black font-black text-xl leading-none pt-0.5 select-none"
                   style={{ fontFamily: "'Syne', sans-serif" }}
                 >
-                  PROMOTEKI
+                  P
                 </motion.span>
-              )}
-            </AnimatePresence>
-          </Link>
+              </motion.div>
+              
+              <div className="overflow-hidden flex items-center">
+                <AnimatePresence>
+                  {!isScrolled && (
+                    <motion.span
+                      layout
+                      initial={{ opacity: 0, width: 0, x: -10 }}
+                      animate={{ opacity: 1, width: "auto", x: 0 }}
+                      exit={{ opacity: 0, width: 0, x: -10 }}
+                      transition={{ 
+                        opacity: { duration: 0.2 },
+                        width: { duration: 0.4, ease: [0.16, 1, 0.3, 1] }
+                      }}
+                      className="text-white font-black text-xs sm:text-lg tracking-tighter whitespace-nowrap pr-2 block"
+                      style={{ fontFamily: "'Syne', sans-serif" }}
+                    >
+                      PROMOTEKI
+                    </motion.span>
+                  )}
+                </AnimatePresence>
+              </div>
+            </Link>
+          </motion.div>
 
           {/* Desktop Links (Shrinking layout) */}
           <motion.div
@@ -136,32 +147,19 @@ const Navbar = () => {
           </motion.div>
 
           {/* Action Area */}
-          <div className="flex items-center gap-2 z-10 flex-shrink-0">
+          <div className="flex items-center gap-2 z-10 flex-shrink-0 pr-1">
             <AnimatePresence mode="popLayout">
-              {!isScrolled && (
-                <motion.div
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: 20 }}
-                  transition={{ duration: 0.3 }}
-                  className="hidden lg:block truncate"
-                >
-                  <Link to="/pricing" className="text-white/60 hover:text-white text-[13px] font-medium px-3 transition-colors">
-                    Pricing
-                  </Link>
-                </motion.div>
-              )}
             </AnimatePresence>
 
             <motion.div
               layout
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="relative hidden sm:block"
+              className="relative hidden sm:block flex-shrink-0"
             >
               <Link
                 to="/contact"
-                className="px-5 py-2 bg-white text-black text-[12px] font-bold rounded-full transition-all duration-300 shadow-lg border border-white/5 whitespace-nowrap inline-flex justify-center min-w-[80px]"
+                className="px-5 py-2 bg-white text-black text-[12px] font-bold rounded-full transition-all duration-300 shadow-lg border border-white/5 whitespace-nowrap inline-flex justify-center min-w-[80px] flex-shrink-0"
               >
                 <AnimatePresence mode="wait">
                   <motion.span

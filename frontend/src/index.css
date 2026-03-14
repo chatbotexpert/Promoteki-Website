@@ -263,3 +263,15 @@ img { max-width: 100%; display: block; }
     margin: 4rem 0;
   }
 }
+
+/* Forge Footer Animations */
+@keyframes scan-slow {
+  0% { transform: translateY(0); opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { transform: translateY(800px); opacity: 0; }
+}
+
+.animate-scan-slow {
+  animation: scan-slow 8s linear infinite;
+}

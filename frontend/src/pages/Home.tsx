@@ -3,6 +3,20 @@ import { Link } from 'react-router-dom';
 import Marquee from '../components/Marquee';
 import { motion, AnimatePresence } from 'framer-motion';
 
+interface AIResult {
+  solutionName: string;
+  description: string;
+  techStack: string[];
+  estimatedHoursSaved: string;
+}
+
+interface TailoredService {
+  num: string;
+  title: string;
+  description: string;
+  image?: string;
+}
+
 const services = [
   { num: '01', title: 'Web Development', desc: 'Modern, high-performance web applications built with the latest frameworks to drive conversions and user engagement.', image: '/images/web_dev.png' },
   { num: '02', title: 'CRM Solutions', desc: 'Custom CRM development and automation to streamline your customer relationships and business operations.', image: '/images/rpa_solutions.png' },
@@ -19,14 +33,14 @@ const ArrowIcon = () => (
 
 const Home = () => {
   const [aiInput, setAiInput] = useState('');
-  const [aiResult, setAiResult] = useState(null);
+  const [aiResult, setAiResult] = useState<AIResult | null>(null);
   const [aiLoading, setAiLoading] = useState(false);
   const [aiError, setAiError] = useState(false);
   const [pitchResult, setPitchResult] = useState('');
   const [pitchLoading, setPitchLoading] = useState(false);
 
   const [industryInput, setIndustryInput] = useState('');
-  const [tailoredServices, setTailoredServices] = useState(null);
+  const [tailoredServices, setTailoredServices] = useState<TailoredService[] | null>(null);
   const [industryLoading, setIndustryLoading] = useState(false);
 
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -36,32 +50,43 @@ const Home = () => {
     setMousePos({ x: e.clientX, y: e.clientY });
   };
 
-  const fetchGemini = async (payload) => {
-    const apiKey = '';
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
-    for (let i = 0; i < 5; i++) {
-      try {
-        const res = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const data = await res.json();
-        return data.candidates?.[0]?.content?.parts?.[0]?.text;
-      } catch (e) {
-        if (i === 4) throw e;
-        await new Promise(r => setTimeout(r, 1000 * Math.pow(2, i)));
-      }
+  const fetchOpenAI = async (messages: any[], isJson: boolean = false) => {
+    const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
+    const url = 'https://api.openai.com/v1/chat/completions';
+    
+    try {
+      const res = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${apiKey}`
+        },
+        body: JSON.stringify({
+          model: 'gpt-4o-mini',
+          messages,
+          response_format: isJson ? { type: "json_object" } : undefined
+        })
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+      return data.choices[0].message.content;
+    } catch (e) {
+      console.error('OpenAI Error:', e);
+      throw e;
     }
   };
 
   const handleGenerate = async () => {
     if (!aiInput.trim()) return;
     setAiLoading(true); setAiError(false); setAiResult(null); setPitchResult('');
-    const payload = {
-      contents: [{ parts: [{ text: `The user's manual task is: "${aiInput}"` }] }],
-      systemInstruction: { parts: [{ text: "You are an expert automation architect for 'Promoteki'. Respond ONLY with valid JSON: {\"solutionName\": \"String\", \"description\": \"String (2-3 sentences)\", \"techStack\": [\"String\"], \"estimatedHoursSaved\": \"String (e.g. '15 HRS/WK')\"}" }] },
-      generationConfig: { responseMimeType: "application/json", responseSchema: { type: "OBJECT", properties: { solutionName: { type: "STRING" }, description: { type: "STRING" }, techStack: { type: "ARRAY", items: { type: "STRING" } }, estimatedHoursSaved: { type: "STRING" } }, required: ["solutionName", "description", "techStack", "estimatedHoursSaved"] } }
-    };
+    
+    const messages = [
+      { role: "system", content: "You are an expert automation architect for 'Promoteki'. Respond ONLY with valid JSON. Schema: {\"solutionName\": \"String\", \"description\": \"String (2-3 sentences)\", \"techStack\": [\"String\"], \"estimatedHoursSaved\": \"String (e.g. '15 HRS/WK')\"}" },
+      { role: "user", content: `The user's manual task is: "${aiInput}"` }
+    ];
+
     try {
-      const text = await fetchGemini(payload);
+      const text = await fetchOpenAI(messages, true);
       setAiResult(JSON.parse(text));
     } catch { setAiError(true); }
     setAiLoading(false);
@@ -70,23 +95,36 @@ const Home = () => {
   const handlePitch = async () => {
     if (!aiResult) return;
     setPitchLoading(true);
-    const payload = {
-      contents: [{ parts: [{ text: `Solution: ${aiResult.solutionName}\nDescription: ${aiResult.description}\nImpact: ${aiResult.estimatedHoursSaved}` }] }],
-      systemInstruction: { parts: [{ text: "Write a 3-sentence email to a boss pitching this automation project. Tone: Brutalist, confident, ROI-focused. Plain text, no greetings." }] }
-    };
-    try { const pitch = await fetchGemini(payload); setPitchResult(pitch); } catch { setPitchResult('> ERROR: UNABLE TO SYNTHESIZE PITCH.'); }
+    
+    const messages = [
+      { role: "system", content: "Write a 3-sentence email to a boss pitching this automation project. Tone: Brutalist, confident, ROI-focused. Plain text, no greetings." },
+      { role: "user", content: `Solution: ${aiResult.solutionName}\nDescription: ${aiResult.description}\nImpact: ${aiResult.estimatedHoursSaved}` }
+    ];
+
+    try { 
+      const pitch = await fetchOpenAI(messages); 
+      setPitchResult(pitch); 
+    } catch { 
+      setPitchResult('> ERROR: UNABLE TO SYNTHESIZE PITCH.'); 
+    }
     setPitchLoading(false);
   };
 
   const handleTailor = async () => {
     if (!industryInput.trim()) return;
     setIndustryLoading(true);
-    const payload = {
-      contents: [{ parts: [{ text: `Industry: ${industryInput}` }] }],
-      systemInstruction: { parts: [{ text: "Adapt Promoteki's 5 services (Web Dev, RPA, API Integration, SaaS, Custom Bots) for this industry. Make titles specific and edgy. Output JSON." }] },
-      generationConfig: { responseMimeType: "application/json", responseSchema: { type: "OBJECT", properties: { services: { type: "ARRAY", items: { type: "OBJECT", properties: { title: { type: "STRING" }, description: { type: "STRING" }, num: { type: "STRING" } }, required: ["title", "description", "num"] } } }, required: ["services"] } }
-    };
-    try { const text = await fetchGemini(payload); setTailoredServices(JSON.parse(text).services); } catch { console.error('Tailor failed'); }
+    
+    const messages = [
+      { role: "system", content: "Adapt Promoteki's 5 services (Web Dev, CRM Solutions, API Integration, SaaS Development, Custom Bots) for this industry. Make titles specific and edgy. Output ONLY valid JSON with a 'services' array containing objects with 'title', 'description', and 'num' (01 to 05)." },
+      { role: "user", content: `Industry: ${industryInput}` }
+    ];
+
+    try { 
+      const text = await fetchOpenAI(messages, true); 
+      setTailoredServices(JSON.parse(text).services); 
+    } catch (e) { 
+      console.error('Tailor failed', e); 
+    }
     setIndustryLoading(false);
   };
 
@@ -234,7 +272,7 @@ const Home = () => {
               </AnimatePresence>
             </motion.div>
 
-            {displayServices.map((svc, i) => (
+            {displayServices.map((svc: TailoredService, i: number) => (
               <div 
                 key={i} 
                 onMouseEnter={() => setHoveredIndex(i)}
@@ -262,7 +300,7 @@ const Home = () => {
         <div className="max-w-5xl mx-auto">
           <div className="flex flex-col md:flex-row gap-12">
             <div className="w-full md:w-1/3">
-              <div className="inline-block border border-[#F4F4F0]/30 px-3 py-1 rounded-full text-xs font-mono uppercase tracking-widest mb-6">System.Gemini_API</div>
+              <div className="inline-block border border-[#F4F4F0]/30 px-3 py-1 rounded-full text-xs font-mono uppercase tracking-widest mb-6">System.OpenAI_API</div>
               <h2 className="text-4xl md:text-5xl font-bold display-font leading-tight mb-4 uppercase">Generate<br />Your Scope.</h2>
               <p className="text-gray-400 text-sm">Describe a manual task tying up your team. Our AI Architect will instantly output a technical blueprint to automate it.</p>
             </div>
@@ -304,7 +342,7 @@ const Home = () => {
                           <span className="bg-green-900 text-green-300 px-3 py-1 inline-block uppercase">SAVINGS: {aiResult.estimatedHoursSaved}</span>
                           <span className="text-xs text-gray-500 block mt-6 mb-2">TECH_STACK:</span>
                           <div className="flex flex-wrap gap-2">
-                            {aiResult.techStack.map((t, i) => (
+                            {aiResult.techStack.map((t: string, i: number) => (
                               <span key={i} className="border border-[#F4F4F0]/30 text-[#F4F4F0] text-xs px-2 py-1">{t}</span>
                             ))}
                           </div>

@@ -39,3 +39,12 @@ export const calculateReadingTime = (content: string): number => {
   const time = Math.ceil(words / wordsPerMinute);
   return time;
 };
+
+export const createSlug = (title: string): string => {
+  return title
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, '') // Remove non-word characters (except spaces and hyphens)
+    .replace(/\s+/g, '-')     // Replace spaces with hyphens
+    .replace(/--+/g, '-')      // Replace multiple hyphens with a single hyphen
+    .trim();                  // Trim whitespace from both ends
+};

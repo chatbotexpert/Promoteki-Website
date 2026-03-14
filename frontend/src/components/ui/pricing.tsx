@@ -79,18 +79,32 @@ export function Pricing({
         </p>
       </div>
 
-      <div className="flex items-center justify-center gap-4 mb-10">
-        <span className={cn("text-sm font-medium transition-colors", isMonthly ? "text-foreground" : "text-muted-foreground")}>Monthly</span>
-        <Label className="relative cursor-pointer">
-          <Switch
-            ref={switchRef as any}
-            checked={!isMonthly}
-            onCheckedChange={handleToggle}
-          />
-        </Label>
-        <span className={cn("text-sm font-medium transition-colors", !isMonthly ? "text-foreground" : "text-muted-foreground")}>
-          Annual billing <span className="text-accent font-bold">(Save 20%)</span>
-        </span>
+      <div className="flex items-center justify-center mb-12">
+        <div className="bg-black/5 p-1 rounded-full border border-black/[0.03] flex items-center ring-1 ring-black/[0.02]">
+          <div className="relative flex items-center">
+            <motion.div 
+              className="absolute h-full bg-[#111111] rounded-full shadow-[0_2px_10px_rgba(0,0,0,0.1)] z-0"
+              animate={{ 
+                x: !isMonthly ? 110 : 0,
+                width: !isMonthly ? 130 : 110
+              }}
+              transition={{ type: "spring", stiffness: 400, damping: 30 }}
+            />
+            <button 
+              onClick={() => setIsMonthly(true)}
+              className={`relative z-10 w-[110px] py-2.5 text-[10px] font-bold uppercase tracking-widest transition-colors duration-300 ${isMonthly ? 'text-white' : 'text-black/40 hover:text-black/60'}`}
+            >
+              Monthly
+            </button>
+            <button 
+              onClick={() => setIsMonthly(false)}
+              className={`relative z-10 w-[130px] py-2.5 text-[10px] font-bold uppercase tracking-widest transition-colors duration-300 flex items-center justify-center gap-2 ${!isMonthly ? 'text-white' : 'text-black/40 hover:text-black/60'}`}
+            >
+              Annually 
+              <span className={`text-[8px] px-1.5 py-0.5 rounded-full font-bold ${!isMonthly ? 'bg-accent text-accent-foreground' : 'bg-black/10 text-black/40'}`}>-10%</span>
+            </button>
+          </div>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

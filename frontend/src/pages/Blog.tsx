@@ -7,7 +7,7 @@ import { getStoredPosts, BlogPost, calculateReadingTime } from '../utils/blogSto
 
 const INITIAL_BLOGS = [
   {
-    id: 'deepseek-shake-tech',
+    id: 'deepseek-shakes-tech-world-chinese-company-redefined-ai-open-source-r1-model',
     title: 'DeepSeek Shakes the Tech World: How a Chinese Company Redefined AI with Its Open-Source R1 Model',
     excerpt: 'Last week, the global tech landscape was rocked by a groundbreaking announcement from Chinese company DeepSeek. The firm stunned the world by releasing its open-source R1 model, a move that not only overshadowed OpenAI\'s efforts but also redefined what\'s possible in artificial intelligence.',
     content: `
