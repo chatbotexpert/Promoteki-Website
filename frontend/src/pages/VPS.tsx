@@ -51,7 +51,7 @@ const VPS = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
-  const basePrice = selectedPlan === 'NODE-1' ? 14.90 : 29.90;
+  const basePrice = selectedPlan === 'NODE-1' ? 29.90 : 44.90;
   
   const totalPrice = useMemo(() => {
     let total = basePrice;
@@ -141,14 +141,14 @@ const VPS = () => {
   return (
     <div className="bg-[#F4F4F0] min-h-screen font-sans text-[#111111]">
       {/* Hero */}
-      <section className="pt-32 pb-16 px-6 min-h-[60vh] flex flex-col justify-end">
+      <section className="pt-24 md:pt-32 pb-12 md:pb-16 px-4 md:px-6 min-h-[50vh] md:min-h-[60vh] flex flex-col justify-end">
         <div className="max-w-7xl mx-auto w-full">
           <p className="text-sm md:text-base uppercase tracking-widest mb-4 font-medium text-gray-500">Infrastructure / Scale</p>
-          <h1 className="text-[10vw] md:text-[8vw] leading-[0.85] font-bold tracking-tighter uppercase display-font">
+          <h1 className="text-[12vw] sm:text-[10vw] md:text-[8vw] leading-[0.85] font-bold tracking-tighter uppercase display-font">
             VPS Forge
           </h1>
           <div className="mt-8 b-top pt-8 max-w-3xl">
-            <p className="text-xl md:text-2xl font-medium leading-relaxed display-font text-gray-700">
+            <p className="text-lg md:text-2xl font-medium leading-relaxed display-font text-gray-700">
               High-performance virtual engines. Select your core plan to begin the deployment sequence.
             </p>
           </div>
@@ -158,23 +158,23 @@ const VPS = () => {
       <Marquee text="AUTOMATED DEPLOYMENT × ENTERPRISE CAPACITY × 99.9% UPTIME ×" dark={false} />
 
       {/* Plan Selection */}
-      <section className="py-24 px-6 bg-white border-t border-black/10">
+      <section className="py-16 md:py-24 px-4 md:px-6 bg-white border-t border-black/10">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
             {/* NODE-1 */}
             <motion.div 
               whileHover={{ y: -10 }}
-              className={`relative border-2 p-10 flex flex-col transition-all duration-500 ${selectedPlan === 'NODE-1' ? 'border-black shadow-[20px_20px_0_0_#D4FF3F]' : 'border-black/5 hover:border-black'}`}
+              className={`relative border-2 p-6 md:p-10 flex flex-col transition-all duration-500 ${selectedPlan === 'NODE-1' ? 'border-black shadow-[10px_10px_0_0_#D4FF3F] md:shadow-[20px_20px_0_0_#D4FF3F]' : 'border-black/5 hover:border-black'}`}
             >
-              <div className="flex justify-between items-start mb-12">
+              <div className="flex flex-col sm:flex-row justify-between items-start mb-8 sm:mb-12 gap-6 sm:gap-4">
                 <div>
-                  <h3 className="text-4xl font-black uppercase tracking-tighter display-font mb-2">NODE-1</h3>
+                  <h3 className="text-2xl sm:text-4xl font-black uppercase tracking-tighter display-font mb-2">NODE-1</h3>
                   <p className="text-[10px] font-black text-black/40 uppercase tracking-[0.2em] leading-none">Standard substratum</p>
                 </div>
-                <div className="text-right">
-                  <span className="text-xs font-bold text-black/20 line-through block leading-none">$19.90</span>
+                <div className="text-left sm:text-right">
+                  <span className="text-xs font-bold text-black/20 line-through block leading-none">$34.90</span>
                   <div className="flex items-baseline gap-1">
-                    <span className="text-4xl font-black tracking-tighter">$14.90</span>
+                    <span className="text-2xl sm:text-4xl font-black tracking-tighter">$29.90</span>
                     <span className="text-[10px] font-bold opacity-30">/MO</span>
                   </div>
                 </div>
@@ -214,19 +214,19 @@ const VPS = () => {
             {/* ULTRA-K1 */}
             <motion.div 
               whileHover={{ y: -10 }}
-              className={`relative border-2 p-10 flex flex-col transition-all duration-500 ${selectedPlan === 'ULTRA-K1' ? 'border-black shadow-[30px_30px_0_0_#111111] bg-white' : 'border-black/5 hover:border-black bg-white/50'}`}
+              className={`relative border-2 p-6 md:p-10 flex flex-col transition-all duration-500 ${selectedPlan === 'ULTRA-K1' ? 'border-black shadow-[15px_15px_0_0_#111111] md:shadow-[30px_30px_0_0_#111111] bg-white' : 'border-black/5 hover:border-black bg-white/50'}`}
             >
               <div className="absolute -top-5 right-8 bg-black text-[#D4FF3F] px-6 py-2 text-[10px] font-black uppercase tracking-[0.3em] ring-4 ring-[#D4FF3F]/20">PREMIUM NODAL</div>
               
-              <div className="flex justify-between items-start mb-12">
+              <div className="flex flex-col sm:flex-row justify-between items-start mb-8 sm:mb-12 gap-6 sm:gap-4">
                 <div>
-                  <h3 className="text-4xl font-black uppercase tracking-tighter display-font mb-2">ULTRA-K1</h3>
+                  <h3 className="text-2xl sm:text-4xl font-black uppercase tracking-tighter display-font mb-2">ULTRA-K1</h3>
                   <p className="text-[10px] font-black text-[#D4FF3F] uppercase tracking-[0.2em] leading-none">Hyper-scale substrate</p>
                 </div>
-                <div className="text-right">
-                  <span className="text-xs font-bold text-black/20 line-through block leading-none">$39.90</span>
+                <div className="text-left sm:text-right">
+                  <span className="text-xs font-bold text-black/20 line-through block leading-none">$54.90</span>
                   <div className="flex items-baseline gap-1">
-                    <span className="text-4xl font-black tracking-tighter">$29.90</span>
+                    <span className="text-2xl sm:text-4xl font-black tracking-tighter">$44.90</span>
                     <span className="text-[10px] font-bold opacity-30">/MO</span>
                   </div>
                 </div>
@@ -277,13 +277,13 @@ const VPS = () => {
             id="config-section"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
-            className="py-24 px-6 border-t border-black/10 bg-[#F4F4F0]"
+            className="py-16 md:py-24 px-4 md:px-6 border-t border-black/10 bg-[#F4F4F0]"
           >
             <div className="max-w-7xl mx-auto">
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
                 
                 {/* Options */}
-                <div className="lg:col-span-8 space-y-20">
+                <div className="lg:col-span-8 space-y-16 lg:space-y-20">
                   
                   {/* Regions */}
                   <div>
@@ -355,7 +355,7 @@ const VPS = () => {
                   </div>
 
                   {/* Backup Toggle */}
-                  <div className="bg-white border-2 border-black/5 p-10 flex flex-col md:flex-row justify-between items-center gap-8">
+                  <div className="bg-white border-2 border-black/5 p-6 md:p-10 flex flex-col md:flex-row justify-between items-center gap-8">
                     <div className="flex items-center gap-6">
                       <div className="w-12 h-12 rounded-full bg-black/5 flex items-center justify-center">
                         <Shield className="w-6 h-6" />
@@ -381,12 +381,12 @@ const VPS = () => {
                   </div>
 
                   {/* Security Inputs */}
-                  <div className="space-y-12">
+                  <div className="space-y-10 lg:space-y-12">
                      <div className="flex items-center gap-3 mb-8">
                         <Lock className="w-5 h-5" />
                         <h4 className="text-2xl font-black uppercase tracking-tighter uppercase display-font">Access Credentials</h4>
                       </div>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
                           <div className="flex flex-col">
                               <label className="text-[10px] font-black uppercase tracking-widest text-black/30 mb-4 flex items-center gap-2">
                                   <Mail className="w-3 h-3" /> Management Email
@@ -419,7 +419,7 @@ const VPS = () => {
 
                 {/* Sticky Summary */}
                 <div className="lg:col-span-4 lg:sticky lg:top-32 h-fit mb-24 lg:mb-0">
-                  <div className="bg-black text-white p-10 relative overflow-hidden ring-1 ring-white/10">
+                  <div className="bg-black text-white p-6 md:p-10 relative overflow-hidden ring-1 ring-white/10">
                     <div className="absolute top-0 right-0 w-16 h-16 bg-[#D4FF3F] translate-x-8 -translate-y-8 rotate-45" />
                     <h3 className="text-2xl font-black uppercase tracking-tighter display-font mb-10 border-b border-white/10 pb-6">Ledger</h3>
                     
@@ -448,8 +448,8 @@ const VPS = () => {
 
                     <div className="pt-8 mb-10">
                       <span className="text-[10px] font-black text-[#D4FF3F] uppercase tracking-widest block mb-1">Deployment Investment</span>
-                      <div className="flex items-baseline gap-2">
-                        <span className="text-5xl font-black tracking-tighter">${totalPrice}</span>
+                      <div className="flex items-baseline gap-2 overflow-hidden">
+                        <span className="text-3xl sm:text-5xl font-black tracking-tighter">${totalPrice}</span>
                         <span className="text-[10px] font-black opacity-30 uppercase">USD / Mo</span>
                       </div>
                     </div>
