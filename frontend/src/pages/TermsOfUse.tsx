@@ -53,7 +53,7 @@ const TermsOfUse = () => {
           <div>
             <h2 className="text-2xl font-bold display-font uppercase mb-4">5. Governing Law</h2>
             <p className="text-gray-600 leading-relaxed">
-              These terms shall be governed and construed in accordance with the laws of Pakistan, without regard to its conflict of law provisions. Any legal action or proceeding related to your access to or use of the Site or services shall be instituted exclusively in the courts located in Multan, Pakistan.
+              These terms shall be governed and construed in accordance with the laws of Germany, without regard to its conflict of law provisions. Any legal action or proceeding related to your access to or use of the Site or services shall be instituted exclusively in the courts located in Munich, Germany.
             </p>
           </div>
 

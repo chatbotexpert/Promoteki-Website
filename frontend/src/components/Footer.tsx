@@ -67,7 +67,7 @@ const Footer = () => {
             </div>
             <div>
               <h4 className="text-[#F4F4F0] uppercase font-bold mb-4">Visit</h4>
-              <p>Office No 43/43A City Tower<br/>Chungi No 9, Multan<br/>Pakistan</p>
+              <p>Welfenstrasse 22<br/>81541 Munich<br/>Germany</p>
             </div>
             <div>
               <h4 className="text-[#F4F4F0] uppercase font-bold mb-4">Legal</h4>

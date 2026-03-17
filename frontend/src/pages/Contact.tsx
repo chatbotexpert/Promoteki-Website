@@ -5,7 +5,7 @@ const Contact = () => {
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
   const [sent, setSent] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setSent(true);
     setTimeout(() => setSent(false), 3000);
@@ -39,7 +39,7 @@ const Contact = () => {
               <div className="space-y-6">
                 <div className="border-t border-black/10 pt-6">
                   <h4 className="font-bold display-font text-sm mb-2 uppercase tracking-wider">Address</h4>
-                  <p className="text-gray-600 text-sm leading-relaxed">Office No 43/43A City Tower<br/>Chungi No 9, Multan<br/>Pakistan</p>
+                  <p className="text-gray-600 text-sm leading-relaxed">Welfenstrasse 22<br/>81541 Munich<br/>Germany</p>
                 </div>
                 <div className="border-t border-black/10 pt-6">
                   <h4 className="font-bold display-font text-sm mb-2 uppercase tracking-wider">Email</h4>
@@ -72,7 +72,7 @@ const Contact = () => {
                 </div>
                 <div className="mb-8">
                   <label className="text-xs font-bold uppercase tracking-widest text-gray-500 mb-3 block">Message</label>
-                  <textarea className="brutalist-input w-full text-lg font-medium resize-none" rows="4" placeholder="Tell us more..." value={form.message} onChange={e => setForm({...form, message: e.target.value})} required></textarea>
+                  <textarea className="brutalist-input w-full text-lg font-medium resize-none" rows={4} placeholder="Tell us more..." value={form.message} onChange={e => setForm({...form, message: e.target.value})} required></textarea>
                 </div>
                 <button type="submit" className="bg-black text-[#F4F4F0] px-8 py-4 uppercase text-sm tracking-widest font-bold hover:bg-gray-800 transition-colors w-full md:w-auto">
                   {sent ? '✓ Message Sent' : 'Send Message →'}

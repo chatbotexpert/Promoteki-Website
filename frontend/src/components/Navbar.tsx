@@ -36,7 +36,7 @@ const Navbar = () => {
     const updateTime = () => {
       const now = new Date();
       const options: Intl.DateTimeFormatOptions = {
-        timeZone: 'Asia/Karachi', // Multan, PK
+        timeZone: 'Europe/Berlin', // Munich, DE
         hour: '2-digit',
         minute: '2-digit',
         second: '2-digit',
