@@ -13,11 +13,11 @@ interface AIResult {
 interface TailoredService {
   num: string;
   title: string;
-  description: string;
-  image?: string;
+  desc: string;
+  image: string;
 }
 
-const services = [
+const services: TailoredService[] = [
   { num: '01', title: 'Web Development', desc: 'Modern, high-performance web applications built with the latest frameworks to drive conversions and user engagement.', image: '/images/web_dev.png' },
   { num: '02', title: 'CRM Solutions', desc: 'Custom CRM development and automation to streamline your customer relationships and business operations.', image: '/images/rpa_solutions.png' },
   { num: '03', title: 'API Integration', desc: 'Design and integrate secure, reliable APIs to connect your systems, third-party apps, and business tools seamlessly.', image: '/images/api_integration.png' },
@@ -300,7 +300,10 @@ const Home = () => {
         <div className="max-w-5xl mx-auto">
           <div className="flex flex-col md:flex-row gap-12">
             <div className="w-full md:w-1/3">
-              <div className="inline-block border border-[#F4F4F0]/30 px-3 py-1 rounded-full text-xs font-mono uppercase tracking-widest mb-6">System.OpenAI_API</div>
+              <div className="inline-flex items-center gap-2 border border-[#D4FF3F]/30 px-3 py-1.5 rounded-full text-[10px] font-black uppercase tracking-[0.2em] mb-8 bg-[#D4FF3F]/5 text-[#D4FF3F]">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#D4FF3F] animate-pulse" />
+                INTELLIGENT ARCHITECT V1.0
+              </div>
               <h2 className="text-4xl md:text-5xl font-bold display-font leading-tight mb-4 uppercase">Generate<br />Your Scope.</h2>
               <p className="text-gray-400 text-sm">Describe a manual task tying up your team. Our AI Architect will instantly output a technical blueprint to automate it.</p>
             </div>
