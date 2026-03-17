@@ -24,10 +24,10 @@ const plans = [
     price: 200
   },
   { 
-    title: 'VPS Hosting', 
-    desc: 'Reliable, high-performance virtual private servers optimized for scale and security.', 
-    features: ['Dedicated Resources', '24/7 Monitoring', 'Automated Backups', 'Scalable CPU/RAM'],
-    price: 50
+    title: 'VPS Forge', 
+    desc: 'High-performance virtual engines. Scalable nodal infrastructure with hyper-speed I/O and mission-critical uptime.', 
+    features: ['4 vCPU / 8GB RAM', 'NVMe / SSD Options', 'Global Edge Regions', '24/7 System Forge'],
+    price: 29.90
   },
   { 
     title: 'Custom Forge', 
