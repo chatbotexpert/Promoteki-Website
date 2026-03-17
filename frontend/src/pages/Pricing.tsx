@@ -174,7 +174,7 @@ const Pricing = () => {
                 </ul>
 
                 <Link 
-                  to={plan.title === 'VPS Hosting' ? "/vps" : "/contact"} 
+                  to={plan.title === 'VPS Forge' ? "/vps" : "/contact"} 
                   className={`block text-center py-4 text-[10px] font-black uppercase tracking-widest transition-all duration-300 border border-black relative overflow-hidden active:scale-95 ${plan.featured 
                     ? 'bg-black text-white hover:bg-gray-800' 
                     : 'bg-transparent text-black hover:bg-black hover:text-white'}`}
